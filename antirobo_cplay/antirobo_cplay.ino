@@ -13,8 +13,9 @@
 // Sensitividad del acelerómetro. ¡Muy sensible!
 #define CLICKTHRESHHOLD 40
 
-// Cuanto esperamos antes de activar. 5000 = 5 segundos
-#define INITIALWAIT 5000
+// Multiplicamos este valor por 10, para el total de tiempo
+// a esperar antes de activar la consola
+#define WAIT 500
 
 void setup(void) {
   Serial.begin(9600);
@@ -25,13 +26,12 @@ void setup(void) {
   CircuitPlayground.setAccelTap(1, CLICKTHRESHHOLD);
   // Esperamos antes de activar la alarma. Visualmente indicamos antes de activar
   // activando los neopixel, uno por uno, con color rojo
-  delay(INITIALWAIT);
   for (int i=0; i<10; ++i) {
      CircuitPlayground.strip.setPixelColor(i, 255, 0, 0);
-     delay(100);
+     delay(WAIT);
      CircuitPlayground.strip.show();
   }
-  delay(1000);
+  delay(WAIT);
   CircuitPlayground.clearPixels();
 }
 
